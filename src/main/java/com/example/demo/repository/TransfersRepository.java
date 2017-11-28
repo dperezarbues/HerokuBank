@@ -2,16 +2,29 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Transfer;
 import com.example.demo.exception.DuplicateTransferIdException;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
 
-public interface TransfersRepository {
+public interface TransfersRepository extends CrudRepository <Transfer,Long> {
 
-  void createTransfer(Transfer transfer) throws DuplicateTransferIdException;
+  default void createTransfer(Transfer transfer) throws DuplicateTransferIdException {
+      save(transfer);
+  }
 
-  Transfer getTransfer(Long transferId);
+  default Transfer getTransfer(Long transferId) {
+      return findOne(transferId);
+  }
 
-  List<Transfer> getTransfer();
+  default List<Transfer> getTransfer() {
 
-  void clearTransfers();
+      return StreamSupport.stream(findAll().spliterator(),false).collect(Collectors.toList());
+
+  }
+
+  default void clearTransfers() {
+      deleteAll();
+  };
 }
