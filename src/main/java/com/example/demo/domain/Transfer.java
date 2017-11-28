@@ -77,6 +77,14 @@ public class Transfer {
     this.status = Status.PENDING;
 
   }
+  
+  public Transfer(){
+    this.transferId = counter.addAndGet(1);
+    this.senderAccountId = "";
+    this.receiverAccountId = "";
+    this.amount = new BigDecimal(0);
+    this.status = Status.FAILED;
+  }
 
   public void setStatus(Status status) {
     if (this.status == Status.COMPLETED) {
