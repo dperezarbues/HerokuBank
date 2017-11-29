@@ -25,9 +25,9 @@ public class Transfer {
   private static AtomicLong counter = new AtomicLong(0);
    
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   @NotNull
-  private final Long transferId;
+  private final Long transferId;\
   
   @NotNull
   @NotEmpty
