@@ -27,7 +27,7 @@ public class Transfer {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   @NotNull
-  private final Long transferId;\
+  private final Long transferId;
   
   @NotNull
   @NotEmpty
