@@ -17,11 +17,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Table(name="transfers")
 public class Transfer {
 
   @JsonIgnore
   private static AtomicLong counter = new AtomicLong(0);
-  
+   
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   @NotNull
