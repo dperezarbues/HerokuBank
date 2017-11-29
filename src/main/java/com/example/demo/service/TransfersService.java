@@ -51,6 +51,7 @@ public class TransfersService {
       if (transfer.getStatus() != Transfer.Status.COMPLETED) {
         transfer.setStatus(Transfer.Status.FAILED);
       }
+      this.transfersRepository.updateTransfer(transfer);
     }
     
     if (transfer.getStatus() == Transfer.Status.COMPLETED) {
