@@ -24,7 +24,7 @@ public class Transfer {
   @GeneratedValue(strategy = GenerationType.SEQUENCE,
                     generator="transfers_transfer_id_seq")
   @NotNull
-  private final Long transferId;
+  private Long transferId;
   
   @NotNull
   @NotEmpty
