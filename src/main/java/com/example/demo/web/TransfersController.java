@@ -55,7 +55,7 @@ public class TransfersController {
     try {
       transfer = this.transfersService.getTransfer(transferId);
     } catch (InsufficientFundsException | AccountNotFoundException te) {
-      return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     return new ResponseEntity<>(buildTransferResource(transfer), HttpStatus.OK);
