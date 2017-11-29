@@ -17,9 +17,6 @@ import javax.persistence.*;
 @Table(name="transfers")
 public class Transfer {
 
-  @JsonIgnore
-  private static AtomicLong counter = new AtomicLong(0);
-   
   @Id
   @SequenceGenerator(name="transfers_transfer_id_seq",
                        sequenceName="transfers_transfer_id_seq",
@@ -72,7 +69,6 @@ public class Transfer {
                   @JsonProperty("receiverAccountId") String receiverAccountId,
                   @JsonProperty("amount") BigDecimal amount) {
 
-    this.transferId = counter.addAndGet(1);
     this.senderAccountId = senderAccountId;
     this.receiverAccountId = receiverAccountId;
     this.amount = amount;
@@ -81,7 +77,6 @@ public class Transfer {
   }
   
   public Transfer(){
-    this.transferId = counter.addAndGet(1);
     this.senderAccountId = "";
     this.receiverAccountId = "";
     this.amount = new BigDecimal(0);
