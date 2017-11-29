@@ -3,6 +3,7 @@ package com.example.demo.repository;
 import com.example.demo.domain.Transfer;
 import com.example.demo.exception.DuplicateTransferIdException;
 import org.springframework.data.repository.CrudRepository;
+import com.example.demo.exception.AccountNotFoundException;
 
 import java.util.List;
 import java.util.stream.StreamSupport;

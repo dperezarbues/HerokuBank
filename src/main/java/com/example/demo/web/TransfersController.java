@@ -49,10 +49,17 @@ public class TransfersController {
 
   @GetMapping(path = "/{transferId}")
   public @ResponseBody
-  Resource<Transfer> getTransfer(@PathVariable Long transferId) {
+  ResponseEntity<Resource<Transfer>> getTransfer(@PathVariable Long transferId) {
     log.info("Retrieving transfer for id {}", transferId);
+    Transfer transfer=new Transfer();
+    try {
+      transfer = this.transfersService.getTransfer(transferId);
+    } catch (InsufficientFundsException | AccountNotFoundException te) {
+      return new ResponseEntity<>(buildTransferResource(transfer), HttpStatus.BAD_REQUEST);
+    }
 
-    return buildTransferResource(this.transfersService.getTransfer(transferId));
+    return new ResponseEntity<>(buildTransferResource(transfer), HttpStatus.OK);
+
   }
 
   @GetMapping
