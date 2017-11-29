@@ -25,7 +25,7 @@ public class TransfersService {
     this.notificationService = notificationService;
   }
 
-  public void executeTransfer(Transfer transfer) {
+  public Transfer executeTransfer(Transfer transfer) {
 
     Account senderAccount = this.accountsService.getAccount(transfer.getSenderAccountId());
     Account receiverAccount = this.accountsService.getAccount(transfer.getReceiverAccountId());
@@ -52,7 +52,7 @@ public class TransfersService {
         transfer.setStatus(Transfer.Status.FAILED);
       }
     }
-
+    
     if (transfer.getStatus() == Transfer.Status.COMPLETED) {
       notificationService.notifyAboutTransfer(senderAccount, "You have sent a transfer " +
         "to Account: " + transfer.getReceiverAccountId() + " for an amount of " + transfer.getAmount());
@@ -60,10 +60,12 @@ public class TransfersService {
       notificationService.notifyAboutTransfer(receiverAccount, "You have received a transfer " +
         "from Account: " + transfer.getSenderAccountId() + " for an amount of " + transfer.getAmount());
     }
+    
+    return this.transfersRepository.updateTransfer(transfer);
   }
 
-  public void createTransfer(Transfer transfer) {
-    this.transfersRepository.createTransfer(transfer);
+  public Transfer createTransfer(Transfer transfer) {
+    return this.transfersRepository.createTransfer(transfer);
   }
 
   public Transfer getTransfer(Long transferId) {

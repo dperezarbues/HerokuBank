@@ -37,8 +37,8 @@ public class TransfersController {
     log.info("Creating transfer {}", transfer);
 
     try {
-      this.transfersService.createTransfer(transfer);
-      this.transfersService.executeTransfer(transfer);
+      transfer = this.transfersService.createTransfer(transfer);
+      transfer = this.transfersService.executeTransfer(transfer);
     } catch (InsufficientFundsException | AccountNotFoundException te) {
       return new ResponseEntity<>(buildTransferResource(transfer), HttpStatus.BAD_REQUEST);
     }

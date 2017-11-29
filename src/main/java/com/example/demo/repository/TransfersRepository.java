@@ -10,8 +10,12 @@ import java.util.stream.Collectors;
 
 public interface TransfersRepository extends CrudRepository <Transfer,Long> {
 
-  default void createTransfer(Transfer transfer) throws DuplicateTransferIdException {
-      save(transfer);
+  default Transfer createTransfer(Transfer transfer) throws DuplicateTransferIdException {
+      return save(transfer);
+  }
+  
+  default Transfer updateTransfer(Transfer transfer) throws DuplicateTransferIdException {
+      return save(transfer);
   }
 
   default Transfer getTransfer(Long transferId) {
