@@ -11,11 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Table(name="transfers")
@@ -25,7 +21,11 @@ public class Transfer {
   private static AtomicLong counter = new AtomicLong(0);
    
   @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  @SequenceGenerator(name="transfers_transfer_id_seq",
+                       sequenceName="transfers_transfer_id_seq",
+                       allocationSize=1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator="transfers_transfer_id_seq")
   @NotNull
   private final Long transferId;
   
