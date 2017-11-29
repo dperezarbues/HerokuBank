@@ -19,7 +19,12 @@ public interface TransfersRepository extends CrudRepository <Transfer,Long> {
   }
 
   default Transfer getTransfer(Long transferId) {
-      return findOne(transferId);
+      Transfer transfer = findOne(transferId);
+      if (transfer == null) {
+          throw new AccountNotFoundException("Not transfer found with ID: " + transferId);
+      } else {
+          return transfer;
+      }
   }
 
   default List<Transfer> getTransfer() {
